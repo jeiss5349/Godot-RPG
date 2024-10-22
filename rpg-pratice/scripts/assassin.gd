@@ -14,11 +14,16 @@ func _init() -> void:
 func _physics_process(delta):
 	var input_vector = Vector2(0, 0)
 	if target != null:
-		input_vector = position.direction_to(target.position)
-		if position.distance_to(target.position) < 20:
+		input_vector = global_position.direction_to(target.global_position)
+		if global_position.distance_to(target.global_position) < 20:
 			input_vector = Vector2.ZERO
-		velocity = (input_vector * MAX_SPEED * delta)
-		move_and_collide(velocity)
+		if input_vector != Vector2.ZERO:
+			velocity = velocity.move_toward(input_vector * MAX_SPEED, ACCELERATION)
+		else:
+			velocity = velocity.move_toward(Vector2.ZERO, FRICTION)
+		
+		# Single call to move_and_slide()
+		move_and_slide()
 		print(input_vector)
 		print(target.position)
 	if input_vector != Vector2(0, 0):
@@ -26,14 +31,14 @@ func _physics_process(delta):
 			animationTree.set("parameters/Run/blend_position", input_vector)
 			animationState.travel("Run")
 			
-			if(position.x - target.position.x) < 0:
+			if(global_position.x - target.global_position.x) < 0:
 				$Sprite2D.flip_h = true
 		else:
 			$Sprite2D.flip_h = false
 	else:
 		animationState.travel("Idle")
 		velocity = (Vector2(0, 0))
-		move_and_collide(velocity)
+		move_and_slide()
 
 	#move_and_slide()
 	
