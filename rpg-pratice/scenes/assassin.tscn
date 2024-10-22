@@ -1,6 +1,6 @@
 [gd_scene load_steps=48 format=3 uid="uid://dfsd2vkc4idig"]
 
-[ext_resource type="Script" path="res://scenes/assassin.gd" id="1_dg3rg"]
+[ext_resource type="Script" path="res://scripts/assassin.gd" id="1_dg3rg"]
 [ext_resource type="Texture2D" uid="uid://dxstduhjokvnv" path="res://art/characters/assassin/idle.png" id="1_jeiml"]
 [ext_resource type="Texture2D" uid="uid://lbg74d4fip8v" path="res://art/characters/assassin/death.png" id="2_g7gh6"]
 [ext_resource type="Texture2D" uid="uid://cj5lutepcob2" path="res://art/characters/assassin/attack 1 with VFX.png" id="4_ocyjx"]
