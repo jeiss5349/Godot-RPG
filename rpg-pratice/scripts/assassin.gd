@@ -12,7 +12,7 @@ var attack_ip = false
 
 var slash_combo_step = 0  # 0 for no attack, 1 for slash1, 2 for slash2
 
-@onready var attack_timer = $attack_timer
+
 @onready var animationTree = $AnimationTree
 @onready var animationState = animationTree.get("parameters/playback")
 
@@ -34,9 +34,9 @@ func _physics_process(delta):
 	else:
 		# Default to 'Idle' when not chasing
 		animationState.travel("Idle")  # Play Idle animation
-		
 	if player_inattack_zone and enemy_attack_cooldown:
 		perform_attack_combo()
+		#print("attack called")
 		
 func _on_detection_area_body_entered(body):
 	player = body
@@ -83,30 +83,24 @@ func reset_damage_cooldown():
 # Handle attack combo (slash1 -> slash2)
 func perform_attack_combo():
 	if player != null and player.player_alive and not attack_ip:
-		attack_ip = true
-		slash_combo_step = 1
+		#attack_ip = true
+		#slash_combo_step = 1
 		animationState.travel("Slash1")  # Trigger 'Slash1' animation
-		attack_timer.start(1)  # Adjust time for "slash1"
+		#print("attack combo started")
 
 func _on_attack_timer_timeout() -> void:
-	if slash_combo_step == 1:
-		if player != null:
-			player.health -= 20  # Damage from slash1
-			print("Player damaged by slash1, player health: ", player.health)
-		
-		slash_combo_step = 2
-		animationState.travel("Slash2")  # Trigger 'Slash2' animation
-		attack_timer.start(1)  # Adjust time for "slash2"
+	damagePlayer()
 
-	elif slash_combo_step == 2:
-		if player != null:
-			player.health -= 20  # Damage from slash2
-			print("Player damaged by slash2, player health: ", player.health)
-		
-		slash_combo_step = 0
-		attack_ip = false
-		enemy_attack_cooldown = false
-		attack_timer.start(2.0)  # Cooldown for next attack
+		#slash_combo_step = 0
+		#attack_ip = false
+	#enemy_attack_cooldown = true
+#
+	#else:
+		#enemy_attack_cooldown = true
 
-	else:
-		enemy_attack_cooldown = true
+func damagePlayer() -> void:
+	if player != null:
+		player.health -= 20
+		print(player.health)
+	
+	

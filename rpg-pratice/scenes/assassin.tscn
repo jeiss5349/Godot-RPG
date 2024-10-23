@@ -1,4 +1,4 @@
-[gd_scene load_steps=41 format=3 uid="uid://dfsd2vkc4idig"]
+[gd_scene load_steps=46 format=3 uid="uid://dfsd2vkc4idig"]
 
 [ext_resource type="Script" path="res://scripts/assassin.gd" id="1_dg3rg"]
 [ext_resource type="Texture2D" uid="uid://dxstduhjokvnv" path="res://art/characters/assassin/idle.png" id="1_jeiml"]
@@ -130,6 +130,7 @@ tracks/2/keys = {
 
 [sub_resource type="Animation" id="Animation_gag5x"]
 resource_name = "Run"
+loop_mode = 1
 step = 0.125
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -207,6 +208,20 @@ tracks/2/keys = {
 "update": 1,
 "values": [0, 1, 2, 3]
 }
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"_on_attack_timer_timeout"
+}]
+}
 
 [sub_resource type="Animation" id="Animation_o1hnl"]
 resource_name = "Slash2"
@@ -246,6 +261,20 @@ tracks/2/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 1,
 "values": [0, 1, 2, 3, 4]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"_on_attack_timer_timeout"
+}]
 }
 
 [sub_resource type="Animation" id="Animation_1gdmw"]
@@ -391,25 +420,41 @@ blend_point_3/pos = Vector2(0, -1)
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_s6rfs"]
 
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_vox3p"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_6q5xq"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ifjxr"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_jnr3h"]
+switch_mode = 2
+advance_mode = 2
+
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_1ei73"]
 states/Idle/node = SubResource("AnimationNodeBlendSpace2D_ig0sj")
-states/Idle/position = Vector2(279.644, 109.725)
+states/Idle/position = Vector2(284.644, 106.725)
 states/Run/node = SubResource("AnimationNodeBlendSpace2D_h4g2u")
 states/Run/position = Vector2(410.644, 115.725)
 states/Slash1/node = SubResource("AnimationNodeBlendSpace2D_5vh6f")
-states/Slash1/position = Vector2(249.644, 206.725)
+states/Slash1/position = Vector2(292.644, 250.725)
 states/Slash2/node = SubResource("AnimationNodeBlendSpace2D_5sx2y")
-states/Slash2/position = Vector2(655.644, 183.725)
-states/Start/position = Vector2(105, 109.725)
-transitions = ["Idle", "Run", SubResource("AnimationNodeStateMachineTransition_bceso"), "Run", "Idle", SubResource("AnimationNodeStateMachineTransition_s6rfs")]
-graph_offset = Vector2(-198.356, 35.7254)
+states/Slash2/position = Vector2(92, 242.725)
+states/Start/position = Vector2(92, 115.725)
+transitions = ["Idle", "Run", SubResource("AnimationNodeStateMachineTransition_bceso"), "Run", "Idle", SubResource("AnimationNodeStateMachineTransition_s6rfs"), "Start", "Idle", SubResource("AnimationNodeStateMachineTransition_vox3p"), "Slash1", "Slash2", SubResource("AnimationNodeStateMachineTransition_6q5xq"), "Idle", "Slash1", SubResource("AnimationNodeStateMachineTransition_ifjxr"), "Slash2", "Idle", SubResource("AnimationNodeStateMachineTransition_jnr3h")]
+graph_offset = Vector2(-176.356, 57.7254)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_djcms"]
-radius = 43.0465
+radius = 56.3769
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_pfydo"]
 radius = 7.0
 height = 16.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_0kwnn"]
+radius = 16.9706
 
 [node name="Assassin" type="CharacterBody2D"]
 script = ExtResource("1_dg3rg")
@@ -432,6 +477,8 @@ parameters/Slash1/blend_position = Vector2(0, 0)
 parameters/Slash2/blend_position = Vector2(0, 0)
 
 [node name="detection_area" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 2
 
 [node name="detection range" type="CollisionShape2D" parent="detection_area"]
 position = Vector2(0, -3)
@@ -442,5 +489,15 @@ shape = SubResource("CircleShape2D_djcms")
 position = Vector2(0, -3)
 shape = SubResource("CapsuleShape2D_pfydo")
 
+[node name="Weapon Hitbox" type="Area2D" parent="."]
+position = Vector2(0, -3)
+
+[node name="Wp HB" type="CollisionShape2D" parent="Weapon Hitbox"]
+position = Vector2(0, -7)
+rotation = -2.29336
+shape = SubResource("CircleShape2D_0kwnn")
+
 [connection signal="body_entered" from="detection_area" to="." method="_on_detection_area_body_entered"]
 [connection signal="body_exited" from="detection_area" to="." method="_on_detection_area_body_exited"]
+[connection signal="body_entered" from="Weapon Hitbox" to="." method="_on_enemy_hitbox_body_entered"]
+[connection signal="body_exited" from="Weapon Hitbox" to="." method="_on_enemy_hitbox_body_exited"]
