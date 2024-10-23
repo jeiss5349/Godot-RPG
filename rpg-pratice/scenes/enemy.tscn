@@ -291,9 +291,8 @@ script = ExtResource("1_a6e2q")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_3ndr3")
-animation = &"death"
+animation = &"slash2"
 autoplay = "idle"
-frame_progress = 0.343613
 speed_scale = 0.5
 offset = Vector2(0, -6)
 
