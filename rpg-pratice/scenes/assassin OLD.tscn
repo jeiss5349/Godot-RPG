@@ -1,12 +1,12 @@
-[gd_scene load_steps=53 format=3 uid="uid://dfsd2vkc4idig"]
+[gd_scene load_steps=53 format=3 uid="uid://b5a627i7fr155"]
 
-[ext_resource type="Script" path="res://scripts/assassin.gd" id="1_dg3rg"]
-[ext_resource type="Texture2D" uid="uid://dxstduhjokvnv" path="res://art/characters/assassin/idle.png" id="1_jeiml"]
-[ext_resource type="Texture2D" uid="uid://cj5lutepcob2" path="res://art/characters/assassin/attack 1 with VFX.png" id="4_82pge"]
-[ext_resource type="Texture2D" uid="uid://c5kvaeq0gvqqe" path="res://art/characters/assassin/attack 2 with VFX.png" id="5_gsj4c"]
-[ext_resource type="Texture2D" uid="uid://d3indarni6mm6" path="res://art/characters/assassin/run with VFX.png" id="6_1kcgc"]
-[ext_resource type="Texture2D" uid="uid://lbg74d4fip8v" path="res://art/characters/assassin/death.png" id="7_8weh6"]
-[ext_resource type="Texture2D" uid="uid://b3p85ecdn6rhk" path="res://art/characters/assassin/hit.png" id="7_k1yhd"]
+[ext_resource type="Script" path="res://scripts/assassin.gd" id="1_h6gqy"]
+[ext_resource type="Texture2D" uid="uid://lbg74d4fip8v" path="res://art/characters/assassin/death.png" id="2_3uwr1"]
+[ext_resource type="Texture2D" uid="uid://dxstduhjokvnv" path="res://art/characters/assassin/idle.png" id="3_3hoau"]
+[ext_resource type="Texture2D" uid="uid://d3indarni6mm6" path="res://art/characters/assassin/run with VFX.png" id="4_x6h8g"]
+[ext_resource type="Texture2D" uid="uid://cj5lutepcob2" path="res://art/characters/assassin/attack 1 with VFX.png" id="5_u4lg8"]
+[ext_resource type="Texture2D" uid="uid://c5kvaeq0gvqqe" path="res://art/characters/assassin/attack 2 with VFX.png" id="6_hgxi4"]
+[ext_resource type="Texture2D" uid="uid://b3p85ecdn6rhk" path="res://art/characters/assassin/hit.png" id="7_uvm8v"]
 
 [sub_resource type="Animation" id="Animation_lc2x3"]
 resource_name = "Death"
@@ -21,7 +21,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("7_8weh6")]
+"values": [ExtResource("2_3uwr1")]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -74,7 +74,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("1_jeiml")]
+"values": [ExtResource("3_3hoau")]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -202,7 +202,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("6_1kcgc")]
+"values": [ExtResource("4_x6h8g")]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -242,7 +242,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("4_82pge")]
+"values": [ExtResource("5_u4lg8")]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -320,7 +320,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("5_gsj4c")]
+"values": [ExtResource("6_hgxi4")]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -398,7 +398,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("7_k1yhd")]
+"values": [ExtResource("7_uvm8v")]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -573,10 +573,12 @@ graph_offset = Vector2(-190.356, 74.7254)
 radius = 56.3769
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_s2y8b"]
-radius = 5.64569
-height = 18.2597
+radius = 9.0
+height = 24.0
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_u8rvm"]
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_meuc3"]
+radius = 8.99933
+height = 31.9976
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_pfydo"]
 height = 20.0
@@ -585,7 +587,7 @@ height = 20.0
 size = Vector2(7, 17)
 
 [node name="Assassin" type="CharacterBody2D"]
-script = ExtResource("1_dg3rg")
+script = ExtResource("1_h6gqy")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, -8)
@@ -607,6 +609,7 @@ parameters/Slash1/blend_position = Vector2(0, 0)
 parameters/Slash2/blend_position = Vector2(0, 0)
 
 [node name="detection_area" type="Area2D" parent="."]
+visible = false
 collision_layer = 2
 collision_mask = 2
 
@@ -619,25 +622,26 @@ shape = SubResource("CircleShape2D_djcms")
 position = Vector2(0, -4)
 
 [node name="Weapon Hitbox" type="Area2D" parent="HitboxPivot"]
-position = Vector2(6, -6)
+position = Vector2(0, -5)
 rotation = -3.14159
 
 [node name="Slash1" type="CollisionShape2D" parent="HitboxPivot/Weapon Hitbox"]
-rotation = -2.29336
+rotation = 1.5708
 shape = SubResource("CapsuleShape2D_s2y8b")
 
 [node name="Slash2" type="CollisionShape2D" parent="HitboxPivot/Weapon Hitbox"]
-rotation = -0.844739
-skew = -0.190241
-shape = SubResource("CircleShape2D_u8rvm")
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_meuc3")
 
 [node name="Enemy Hurtbox" type="Area2D" parent="."]
+visible = false
 position = Vector2(0, -7)
 
 [node name="Enemy health Hitbox" type="CollisionShape2D" parent="Enemy Hurtbox"]
 shape = SubResource("CapsuleShape2D_pfydo")
 
 [node name="Body" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2(0.5, -8.5)
 shape = SubResource("RectangleShape2D_ltn6y")
 

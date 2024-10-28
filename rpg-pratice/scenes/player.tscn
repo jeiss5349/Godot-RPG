@@ -567,7 +567,6 @@ animations = [{
 radius = 12.0416
 
 [node name="player" type="CharacterBody2D"]
-z_index = 2
 collision_layer = 3
 collision_mask = 3
 script = ExtResource("1_ffe7a")
@@ -583,10 +582,12 @@ shape = SubResource("RectangleShape2D_5a04a")
 position = Vector2(0, -2)
 sprite_frames = SubResource("SpriteFrames_7vhaw")
 animation = &"back_walk"
-frame_progress = 0.115302
+frame_progress = 0.203877
 offset = Vector2(0, -12)
 
 [node name="player_hitbox" type="Area2D" parent="."]
+collision_layer = 3
+collision_mask = 3
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="player_hitbox"]
 position = Vector2(1, -9)
@@ -601,7 +602,7 @@ wait_time = 0.6
 position = Vector2(22, 26)
 zoom = Vector2(4, 4)
 limit_left = 0
-limit_top = 2
+limit_top = -28
 limit_right = 304
 limit_bottom = 223
 limit_smoothed = true

@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://dkh40nj1cy06d" path="res://art/tilesets/grass.png" id="2_qkc0l"]
 [ext_resource type="Texture2D" uid="uid://yrb5djll4xum" path="res://art/objects/objects.png" id="3_1x3jn"]
 [ext_resource type="PackedScene" uid="uid://0mnpfdxtdf0" path="res://scenes/player.tscn" id="4_ocpwf"]
-[ext_resource type="PackedScene" uid="uid://dfsd2vkc4idig" path="res://scenes/assassin.tscn" id="6_xfdyn"]
+[ext_resource type="PackedScene" uid="uid://b5a627i7fr155" path="res://scenes/assassin OLD.tscn" id="6_x5r81"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_gkv0e"]
 texture = ExtResource("1_adffk")
@@ -57,11 +57,11 @@ texture = ExtResource("3_1x3jn")
 6:7/size_in_atlas = Vector2i(2, 2)
 6:7/0 = 0
 6:7/0/y_sort_origin = 5
-6:7/0/physics_layer_0/polygon_0/points = PackedVector2Array(-13.0815, -9.19239, -4.41942, -13.7886, -0.5, -12.5, 2.5, -11.75, 4.25, -16, 8, -13.5, 11.25, -8.25, 12.5, -2.5, 12.75, 5.25, 10, 11, 2, 11.75, -5, 13.5, -13.75, 10.75, -14.75, 5, -15, -1.75)
+6:7/0/physics_layer_0/polygon_0/points = PackedVector2Array(-15.75, 7.25, -15.125, 9, -17.375, 19.875, -10.625, 20.25, -3.75, 22, 2.5, 22.75, 11.25, 22.5, 16.5, 22.375, 19.125, 22.625, 16.875, 11.125, 14.75, 6.75, -8, 8, -13.75, 7.375)
 8:6/size_in_atlas = Vector2i(2, 3)
 8:6/0 = 0
 8:6/0/y_sort_origin = 17
-8:6/0/physics_layer_0/polygon_0/points = PackedVector2Array(3.53554, 15.9099, 7.07107, 19.799, -4.59619, 21.2132, -3.88909, 16.9706)
+8:6/0/physics_layer_0/polygon_0/points = PackedVector2Array(-15.75, 7.25, -15.125, 9, -7.125, 29.125, -1.125, 30.125, 5, 30.5, 9.875, 31, 16.875, 11.125, 14.75, 6.75, -8, 8, -13.75, 7.375)
 10:7/size_in_atlas = Vector2i(2, 2)
 10:7/0 = 0
 10:7/0/y_sort_origin = 5
@@ -69,10 +69,11 @@ texture = ExtResource("3_1x3jn")
 0:5/size_in_atlas = Vector2i(3, 4)
 0:5/0 = 0
 0:5/0/y_sort_origin = 18
-0:5/0/physics_layer_0/polygon_0/points = PackedVector2Array(-2.52992, 12.8976, -8.87953, 12.9968, -12.1535, 15.1795, -12.0543, 17.9575, -9.77244, 17.263, -11.4591, 19.6441, -11.5583, 23.1165, -6.59764, 22.422, -6.10157, 25.5968, -0.843306, 26.2913, -0.24803, 24.2079, 3.1252, 24.6047, 3.72047, 25.9937, 9.77244, 25.6961, 8.78031, 22.3228, 7.0937, 20.2394, 9.4748, 21.6283, 12.0543, 21.8268, 11.3598, 18.3543, 10.0701, 16.9654, 8.28425, 13.7905, 7.58976, 12.1039, 4.31575, 12.4016)
+0:5/0/physics_layer_0/polygon_0/points = PackedVector2Array(-11.25, 16.75, -10.375, 14.5, -7.375, 13.25, 6.5, 13, 7.875, 15, 9.75, 16.5, 11.625, 18.25, 11.125, 20.875, 15.5, 27, 14.25, 30, 9.625, 31, 2.5, 31, -5, 30.625, -11.875, 29.25, -11.25, 20.125, -9.125, 18.5)
 
 [sub_resource type="TileSet" id="TileSet_rj4xp"]
-physics_layer_0/collision_layer = 1
+physics_layer_0/collision_layer = 0
+physics_layer_0/collision_mask = 0
 sources/0 = SubResource("TileSetAtlasSource_gkv0e")
 sources/1 = SubResource("TileSetAtlasSource_68psn")
 sources/2 = SubResource("TileSetAtlasSource_34xfu")
@@ -82,6 +83,7 @@ y_sort_enabled = true
 position = Vector2(-1, -2)
 
 [node name="TileMap" type="TileMap" parent="."]
+visible = false
 position = Vector2(80, 98)
 tile_set = SubResource("TileSet_rj4xp")
 format = 2
@@ -99,11 +101,14 @@ use_parent_material = true
 tile_map_data = PackedByteArray("AAD8//v/AgAKAAcAAAD///3/AgAKAAcAAAAJAAUAAgAAAAUAAAD9/wQAAgAAAAUAAAACAAYAAgAIAAYAAAA=")
 tile_set = SubResource("TileSet_rj4xp")
 
-[node name="Assassin" parent="." instance=ExtResource("6_xfdyn")]
-position = Vector2(243, 133)
-
 [node name="player" parent="." instance=ExtResource("4_ocpwf")]
 position = Vector2(48, 101)
 
-[node name="Assassin2" parent="." instance=ExtResource("6_xfdyn")]
-position = Vector2(158, 179)
+[node name="Assassin3" parent="." instance=ExtResource("6_x5r81")]
+position = Vector2(74, 177)
+
+[node name="Assassin" parent="." instance=ExtResource("6_x5r81")]
+position = Vector2(149, 183)
+
+[node name="Assassin2" parent="." instance=ExtResource("6_x5r81")]
+position = Vector2(171, 130)
