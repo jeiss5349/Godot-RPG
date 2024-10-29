@@ -2,13 +2,17 @@ extends CharacterBody2D
 
 var speed = 100
 var player_chase = false
+var sweep_IP = false
 var player = null
 
 var health = 100
 var player_inattack_zone = false
 var can_take_damage = true
 var enemy_attack_cooldown = true
+const sweep_speed = 4500
 var attack_ip = false
+
+var sweep_Vector = Vector2.ZERO
 
 var slash_combo_step = 0  # 0 for no attack, 1 for slash1, 2 for slash2
 
@@ -35,8 +39,15 @@ func _physics_process(delta):
 		else:
 			# Default to 'Idle' when not chasing
 			animationState.travel("Idle")  # Play Idle animation
+		if sweep_IP:
+			sweepMove(delta)
+			
+		
 		if player_inattack_zone and enemy_attack_cooldown:
 			perform_attack_combo()
+		elif enemy_attack_cooldown and player_chase:
+			sweep_attack()
+		
 			#print("attack called")
 		
 func _on_detection_area_body_entered(body):
@@ -93,6 +104,26 @@ func perform_attack_combo():
 		#slash_combo_step = 1e
 			animationState.travel("Slash1")  # Trigger 'Slash1' animation
 		#print("attack combo started")
+func sweep_attack():
+	if player.player_alive and not attack_ip:
+		sweep_Vector = (player.position - position).normalized()
+		print(sweep_Vector)
+		animationState.travel("sweepCharge")
+		sweep_IP = true
+		attack_ip = true
+		player_chase = false
+
+			
+func attack_finished():
+	attack_ip = false
+	sweep_IP  = false
+	if player != null:
+		player_chase = true
+
+func sweepMove(delta):
+	velocity = sweep_Vector * sweep_speed * delta
+	move_and_slide()
+	
 
 func _on_attack_timer_timeout() -> void:
 	damagePlayer()

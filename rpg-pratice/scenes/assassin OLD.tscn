@@ -1,4 +1,4 @@
-[gd_scene load_steps=53 format=3 uid="uid://b5a627i7fr155"]
+[gd_scene load_steps=62 format=3 uid="uid://b5a627i7fr155"]
 
 [ext_resource type="Script" path="res://scripts/assassin.gd" id="1_h6gqy"]
 [ext_resource type="Texture2D" uid="uid://lbg74d4fip8v" path="res://art/characters/assassin/death.png" id="2_3uwr1"]
@@ -7,6 +7,8 @@
 [ext_resource type="Texture2D" uid="uid://cj5lutepcob2" path="res://art/characters/assassin/attack 1 with VFX.png" id="5_u4lg8"]
 [ext_resource type="Texture2D" uid="uid://c5kvaeq0gvqqe" path="res://art/characters/assassin/attack 2 with VFX.png" id="6_hgxi4"]
 [ext_resource type="Texture2D" uid="uid://b3p85ecdn6rhk" path="res://art/characters/assassin/hit.png" id="7_uvm8v"]
+[ext_resource type="Texture2D" uid="uid://cdm1lktcjjt88" path="res://art/characters/assassin/Sweep Attack with VFX 1st Part.png" id="8_o0avj"]
+[ext_resource type="Texture2D" uid="uid://ba7j8rqv5lvyu" path="res://art/characters/assassin/Sweep Attack with VFX 2nd Part.png" id="9_bm8hs"]
 
 [sub_resource type="Animation" id="Animation_lc2x3"]
 resource_name = "Death"
@@ -187,6 +189,18 @@ tracks/6/keys = {
 "update": 1,
 "values": [false]
 }
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("HitboxPivot/Weapon Hitbox:position")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -5)]
+}
 
 [sub_resource type="Animation" id="Animation_gag5x"]
 resource_name = "Run"
@@ -353,9 +367,12 @@ tracks/3/path = NodePath(".")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(1),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0.985468, 1),
+"transitions": PackedFloat32Array(1, 1),
 "values": [{
+"args": [],
+"method": &"attack_finished"
+}, {
 "args": [],
 "method": &"_on_attack_timer_timeout"
 }]
@@ -425,6 +442,115 @@ tracks/2/keys = {
 "values": [0, 1]
 }
 
+[sub_resource type="Animation" id="Animation_yqbem"]
+resource_name = "sweepCharge"
+step = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("8_o0avj")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:vframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [5]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4]
+}
+
+[sub_resource type="Animation" id="Animation_23sso"]
+resource_name = "sweepFollow"
+step = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("9_bm8hs")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:vframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [5]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.4, 1),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"_on_attack_timer_timeout"
+}, {
+"args": [],
+"method": &"attack_finished"
+}]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("HitboxPivot/Weapon Hitbox:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(8, -5), Vector2(12, -5), Vector2(14, -5), Vector2(16, -5), Vector2(18, -5)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_jbr00"]
 _data = {
 "Death": SubResource("Animation_lc2x3"),
@@ -433,7 +559,9 @@ _data = {
 "Run": SubResource("Animation_gag5x"),
 "Slash1": SubResource("Animation_bqmgx"),
 "Slash2": SubResource("Animation_o1hnl"),
-"dmgTaken": SubResource("Animation_1gdmw")
+"dmgTaken": SubResource("Animation_1gdmw"),
+"sweepCharge": SubResource("Animation_yqbem"),
+"sweepFollowThrough": SubResource("Animation_23sso")
 }
 
 [sub_resource type="AnimationNodeBlendSpace2D" id="AnimationNodeBlendSpace2D_54pss"]
@@ -529,6 +657,12 @@ blend_point_2/pos = Vector2(1, 0)
 blend_point_3/node = SubResource("AnimationNodeAnimation_fmona")
 blend_point_3/pos = Vector2(0, -1)
 
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_l0fhe"]
+animation = &"sweepCharge"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_2pxbo"]
+animation = &"sweepFollowThrough"
+
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_bceso"]
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_s6rfs"]
@@ -552,6 +686,16 @@ advance_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_5otwi"]
 
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_liq11"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_oeh6e"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_l8wwu"]
+switch_mode = 2
+advance_mode = 2
+
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_1ei73"]
 states/BlendSpace2D/node = SubResource("AnimationNodeBlendSpace2D_54pss")
 states/BlendSpace2D/position = Vector2(661.644, -31.2746)
@@ -566,8 +710,12 @@ states/Slash1/position = Vector2(284.644, 233.725)
 states/Slash2/node = SubResource("AnimationNodeBlendSpace2D_5sx2y")
 states/Slash2/position = Vector2(111, 388.725)
 states/Start/position = Vector2(92, 115.725)
-transitions = ["Idle", "Run", SubResource("AnimationNodeStateMachineTransition_bceso"), "Run", "Idle", SubResource("AnimationNodeStateMachineTransition_s6rfs"), "Start", "Idle", SubResource("AnimationNodeStateMachineTransition_vox3p"), "Slash1", "Slash2", SubResource("AnimationNodeStateMachineTransition_6q5xq"), "Idle", "Slash1", SubResource("AnimationNodeStateMachineTransition_ifjxr"), "Slash2", "Idle", SubResource("AnimationNodeStateMachineTransition_jnr3h"), "Idle", "Death", SubResource("AnimationNodeStateMachineTransition_eisid"), "Slash1", "Death", SubResource("AnimationNodeStateMachineTransition_tnu2h"), "Slash2", "Death", SubResource("AnimationNodeStateMachineTransition_5otwi")]
-graph_offset = Vector2(-190.356, 74.7254)
+states/sweepCharge/node = SubResource("AnimationNodeAnimation_l0fhe")
+states/sweepCharge/position = Vector2(424.644, -52.2746)
+states/sweepFollowThrough/node = SubResource("AnimationNodeAnimation_2pxbo")
+states/sweepFollowThrough/position = Vector2(188.644, -52.2746)
+transitions = ["Idle", "Run", SubResource("AnimationNodeStateMachineTransition_bceso"), "Run", "Idle", SubResource("AnimationNodeStateMachineTransition_s6rfs"), "Start", "Idle", SubResource("AnimationNodeStateMachineTransition_vox3p"), "Slash1", "Slash2", SubResource("AnimationNodeStateMachineTransition_6q5xq"), "Idle", "Slash1", SubResource("AnimationNodeStateMachineTransition_ifjxr"), "Slash2", "Idle", SubResource("AnimationNodeStateMachineTransition_jnr3h"), "Idle", "Death", SubResource("AnimationNodeStateMachineTransition_eisid"), "Slash1", "Death", SubResource("AnimationNodeStateMachineTransition_tnu2h"), "Slash2", "Death", SubResource("AnimationNodeStateMachineTransition_5otwi"), "Idle", "sweepCharge", SubResource("AnimationNodeStateMachineTransition_liq11"), "sweepCharge", "sweepFollowThrough", SubResource("AnimationNodeStateMachineTransition_oeh6e"), "sweepFollowThrough", "Idle", SubResource("AnimationNodeStateMachineTransition_l8wwu")]
+graph_offset = Vector2(-8.356, -123.275)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_djcms"]
 radius = 56.3769
