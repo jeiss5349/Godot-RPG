@@ -16,14 +16,19 @@ var sweep_Vector = Vector2.ZERO
 
 var slash_combo_step = 0  # 0 for no attack, 1 for slash1, 2 for slash2
 
+enum {
+	IDLE,
+	RUN,
+	SLASH,
+	SWEEP,
+	DEATH
+}
 
 @onready var animationTree = $AnimationTree
 @onready var animationState = animationTree.get("parameters/playback")
 
 func _physics_process(delta):
 	if health > 0:
-		deal_with_damage()
-		
 		if player_chase:
 			# Move towards player
 			position += (player.position - position)/speed
@@ -33,9 +38,11 @@ func _physics_process(delta):
 			
 			# Flip sprite based on player's position
 			if(player.position.x - position.x) < 0:
-				$Sprite2D.flip_h = true
+				#$Sprite2D.flip_h = true
+				scale.x = -scale.x
 			else:
-				$Sprite2D.flip_h = false
+				#$Sprite2D.flip_h = false
+				scale.x = abs(scale.x)
 		else:
 			# Default to 'Idle' when not chasing
 			animationState.travel("Idle")  # Play Idle animation
@@ -49,7 +56,12 @@ func _physics_process(delta):
 			sweep_attack()
 		
 			#print("attack called")
+func move_state():
+	{
 		
+	}
+
+
 func _on_detection_area_body_entered(body):
 	player = body
 	player_chase = true
@@ -69,7 +81,8 @@ func _on_enemy_hitbox_body_exited(body: Node2D) -> void:
 		print("left range")
 
 func deal_with_damage():
-	if player_inattack_zone and Global.player_current_attack == true:
+	print("attack recieved")
+	if player_inattack_zone:
 		if can_take_damage == true:
 			health -= 30  # Reduce enemy's health
 			can_take_damage = false

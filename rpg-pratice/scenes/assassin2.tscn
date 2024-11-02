@@ -715,7 +715,7 @@ states/sweepCharge/position = Vector2(424.644, -52.2746)
 states/sweepFollowThrough/node = SubResource("AnimationNodeAnimation_2pxbo")
 states/sweepFollowThrough/position = Vector2(188.644, -52.2746)
 transitions = ["Idle", "Run", SubResource("AnimationNodeStateMachineTransition_bceso"), "Run", "Idle", SubResource("AnimationNodeStateMachineTransition_s6rfs"), "Start", "Idle", SubResource("AnimationNodeStateMachineTransition_vox3p"), "Slash1", "Slash2", SubResource("AnimationNodeStateMachineTransition_6q5xq"), "Idle", "Slash1", SubResource("AnimationNodeStateMachineTransition_ifjxr"), "Slash2", "Idle", SubResource("AnimationNodeStateMachineTransition_jnr3h"), "Idle", "Death", SubResource("AnimationNodeStateMachineTransition_eisid"), "Slash1", "Death", SubResource("AnimationNodeStateMachineTransition_tnu2h"), "Slash2", "Death", SubResource("AnimationNodeStateMachineTransition_5otwi"), "Idle", "sweepCharge", SubResource("AnimationNodeStateMachineTransition_liq11"), "sweepCharge", "sweepFollowThrough", SubResource("AnimationNodeStateMachineTransition_oeh6e"), "sweepFollowThrough", "Idle", SubResource("AnimationNodeStateMachineTransition_l8wwu")]
-graph_offset = Vector2(-8.356, -123.275)
+graph_offset = Vector2(-23.6985, 14.7679)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_djcms"]
 radius = 56.3769

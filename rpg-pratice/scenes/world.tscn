@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://dkh40nj1cy06d" path="res://art/tilesets/grass.png" id="2_qkc0l"]
 [ext_resource type="Texture2D" uid="uid://yrb5djll4xum" path="res://art/objects/objects.png" id="3_1x3jn"]
 [ext_resource type="PackedScene" uid="uid://0mnpfdxtdf0" path="res://scenes/player.tscn" id="4_ocpwf"]
-[ext_resource type="PackedScene" uid="uid://b5a627i7fr155" path="res://scenes/assassin OLD.tscn" id="6_x5r81"]
+[ext_resource type="PackedScene" uid="uid://b5a627i7fr155" path="res://scenes/assassin2.tscn" id="6_x5r81"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_gkv0e"]
 texture = ExtResource("1_adffk")
