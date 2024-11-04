@@ -104,11 +104,5 @@ tile_set = SubResource("TileSet_rj4xp")
 [node name="player" parent="." instance=ExtResource("4_ocpwf")]
 position = Vector2(48, 101)
 
-[node name="Assassin3" parent="." instance=ExtResource("6_x5r81")]
-position = Vector2(74, 177)
-
 [node name="Assassin" parent="." instance=ExtResource("6_x5r81")]
 position = Vector2(149, 183)
-
-[node name="Assassin2" parent="." instance=ExtResource("6_x5r81")]
-position = Vector2(171, 130)

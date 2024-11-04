@@ -7,11 +7,9 @@ var enemy_attack_cooldown = true
 var health = 600 
 var player_alive = true
 var enemy_reference = null
-const assassin = preload("res://scripts/assassin.gd")
 
 
-
-const speed = 100
+const speed = 2
 var current_dir = "none"
 
 var attack_ip = false
@@ -59,7 +57,7 @@ func player_movement(delta):
 		velocity.x = 0
 		velocity.y = 0
 		
-	move_and_slide()
+	move_and_collide(velocity)
 func play_anim(movement):
 	var dir = current_dir
 	var anim = $AnimatedSprite2D
@@ -96,13 +94,14 @@ func player():
 	pass
 
 func _on_player_hitbox_body_entered(body: Node2D) -> void:
-	if body.has_method("enemy"):
-		if body is assassin:
-			enemy_reference = body as assassin
+
+		if body is assassin2:
+			enemy_reference = body as assassin2
+			
 
 
 func _on_player_hitbox_body_exited(body: Node2D) -> void:
-	if body.has_method("enemy"):
+	if body is assassin2:
 		enemy_reference = null
 		
 #func enemy_attack():
@@ -119,30 +118,29 @@ func _on_attack_cooldown_timeout() -> void:
 func attack():
 	var dir = current_dir
 	if Input.is_action_just_pressed("attack"):
-		print(dir)
+		attack_ip = true
 		if enemy_reference != null:
-			enemy_reference.deal_with_damage() 
-			attack_ip = true
+			enemy_reference.deal_with_damage(30) 
 		if dir == "right":
 			$AnimatedSprite2D.flip_h = false
 			$AnimatedSprite2D.play("side_attack")
 			$deal_attack_timer.start()
-			print("right attack")
+
 		elif dir == "left":
 			$AnimatedSprite2D.flip_h = true
 			$AnimatedSprite2D.play("side_attack")
 			$deal_attack_timer.start()
-			print("left attack")
+
 		elif dir == "down":
 			$AnimatedSprite2D.flip_h = false
 			$AnimatedSprite2D.play("front_attack")
 			$deal_attack_timer.start()
-			print("down attack")
+
 		elif dir == "up":
 			$AnimatedSprite2D.flip_h = false
 			$AnimatedSprite2D.play("back_attack")
 			$deal_attack_timer.start()
-			print("up attack")
+
 
 func _on_deal_attack_timer_timeout() -> void:
 	$deal_attack_timer.stop()
