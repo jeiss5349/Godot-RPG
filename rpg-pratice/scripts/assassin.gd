@@ -7,7 +7,7 @@ var player_chase = false
 var sweep_IP = false
 var player = null
 
-var health = 300
+var health = 100
 var player_inattack_zone = false
 var can_take_damage = true
 var enemy_attack_cooldown = true
@@ -31,8 +31,8 @@ var state = IDLE
 @onready var animationState = animationTree.get("parameters/playback")
 
 func _physics_process(delta):
-	orient()
-			
+
+	#print(state)
 	match state:
 		IDLE:
 			idle_state()
@@ -46,73 +46,78 @@ func _physics_process(delta):
 			death_state()
 			
 
-			
+func try_change_state(new_state):
+	if not attack_ip and state != DEATH:
+		state = new_state
+
 func orient():
-	if player != null:
-		if(player.position.x - position.x) < 0:
-			#$Sprite2D.flip_h = true
-			scale.x = -scale.x
-		else:
-			#$Sprite2D.flip_h = false
-			scale.x = abs(scale.x)
+	if player != null and state != DEATH:
+		if(player.position.x - position.x) < -5:
+			$HitboxPivot.global_rotation_degrees = 0.0
+			$Sprite2D.flip_h = true
+			#scale.x = -scale.x
+
+		elif(player.position.x - position.x) > 5:
+			$HitboxPivot.global_rotation_degrees = 180.0
+			$Sprite2D.flip_h = false
+			#scale.x = abs(scale.x)
 
 func run_state():
+	if player != null:
+		orient()
 		position += (player.position - position)/speed
 		animationTree.set("parameters/blend_position", Vector2(1, 0))  # Trigger 'Run'
 		animationState.travel("Run")  # Ensure 'Run' animation plays
 		move_and_collide(Vector2(0, 0)) 
-		if player != null:
-			if position.distance_to(player.global_position) >= 75:
-				state = SWEEP
-		
-		print("run")
-		
-		
-		
-		# Flip sprite based on player's position
-	
-			
+		if position.distance_to(player.global_position) >= 50:
+			try_change_state(SWEEP)
+		elif position.distance_to(player.global_position) < 15:
+			try_change_state(SLASH)
+	else:
+		try_change_state(IDLE)
+
 func idle_state():
+	orient()
 	animationState.travel("Idle")
-	print("idle")
+
 
 func death_state():
-	
-	print("dead")
+	pass
+
 	
 func sweep_state(delta):
+	print("sweeping")
 	if attack_ip:
-		sweepMove(delta)
-	elif enemy_attack_cooldown and player_chase:
+		sweep_move(delta)
+		print("sweep move")
+	elif enemy_attack_cooldown:
 		sweep_attack()
+		print("sweep attack")
 		
-	print("sweep")
-	
-	
 	
 func slash_state():
 	if player_inattack_zone and enemy_attack_cooldown:
 			perform_attack_combo()
-	print("slash")
+
 
 
 func _on_detection_area_body_entered(body):
 	player = body
-	state = RUN
+	try_change_state(RUN)
 
 func _on_detection_area_body_exited(body):
 	player = null
-	state = IDLE
+	try_change_state(IDLE)
 	
 func _on_enemy_hitbox_body_entered(body: Node2D) -> void:
 	if body.has_method("player"):
 		player_inattack_zone = true
-		state = SLASH
+		try_change_state(SLASH)
 
 func _on_enemy_hitbox_body_exited(body: Node2D) -> void:
 	if body.has_method("player"):
 		player_inattack_zone = false
-		state = RUN
+		try_change_state(RUN)
 
 func deal_with_damage(dmgAmount : int):
 	if player_inattack_zone:
@@ -122,7 +127,7 @@ func deal_with_damage(dmgAmount : int):
 			print("enemy health = ", health)  # Debugging message
 			if health <= 0:
 				play_death_animation()  # Trigger death animation
-				state = DEATH
+				try_change_state(DEATH)
 				print("Enemy defeated!")  # Debugging message
 			else: 
 				await get_tree().create_timer(1.0).timeout
@@ -159,23 +164,17 @@ func sweep_attack():
 		animationState.travel("sweepCharge")
 		sweep_IP = true
 		attack_ip = true
-	
 
-			
-func attack_finished():
-	attack_ip = false
-	sweep_IP  = false
-	if player != null:
-		state = RUN
-		#player_chase = true
 
-func sweepMove(delta):
+func sweep_move(delta):
 	velocity = sweep_Vector * sweep_speed * delta
 	move_and_slide()
 	
 
 func _on_attack_timer_timeout() -> void:
-	damagePlayer()
+	damage_player()
+	attack_ip = false
+	try_change_state(RUN)
 
 		#slash_combo_step = 0
 		#attack_ip = false
@@ -184,7 +183,7 @@ func _on_attack_timer_timeout() -> void:
 	#else:
 		#enemy_attack_cooldown = true
 
-func damagePlayer() -> void:
+func damage_player() -> void:
 	if player_inattack_zone:
 		player.health -= 10
 		print(player.health)

@@ -715,7 +715,7 @@ states/sweepCharge/position = Vector2(424.644, -52.2746)
 states/sweepFollowThrough/node = SubResource("AnimationNodeAnimation_2pxbo")
 states/sweepFollowThrough/position = Vector2(188.644, -52.2746)
 transitions = ["Idle", "Run", SubResource("AnimationNodeStateMachineTransition_bceso"), "Run", "Idle", SubResource("AnimationNodeStateMachineTransition_s6rfs"), "Start", "Idle", SubResource("AnimationNodeStateMachineTransition_vox3p"), "Slash1", "Slash2", SubResource("AnimationNodeStateMachineTransition_6q5xq"), "Idle", "Slash1", SubResource("AnimationNodeStateMachineTransition_ifjxr"), "Slash2", "Idle", SubResource("AnimationNodeStateMachineTransition_jnr3h"), "Idle", "Death", SubResource("AnimationNodeStateMachineTransition_eisid"), "Slash1", "Death", SubResource("AnimationNodeStateMachineTransition_tnu2h"), "Slash2", "Death", SubResource("AnimationNodeStateMachineTransition_5otwi"), "Idle", "sweepCharge", SubResource("AnimationNodeStateMachineTransition_liq11"), "sweepCharge", "sweepFollowThrough", SubResource("AnimationNodeStateMachineTransition_oeh6e"), "sweepFollowThrough", "Idle", SubResource("AnimationNodeStateMachineTransition_l8wwu")]
-graph_offset = Vector2(-23.6985, 14.7679)
+graph_offset = Vector2(-119.699, -119.232)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_djcms"]
 radius = 56.3769
@@ -767,17 +767,19 @@ scale = Vector2(0.994737, 0.995169)
 shape = SubResource("CircleShape2D_djcms")
 
 [node name="HitboxPivot" type="Marker2D" parent="."]
-position = Vector2(0, -4)
+position = Vector2(0, -7)
 
 [node name="Weapon Hitbox" type="Area2D" parent="HitboxPivot"]
 position = Vector2(0, -5)
 rotation = -3.14159
 
 [node name="Slash1" type="CollisionShape2D" parent="HitboxPivot/Weapon Hitbox"]
+position = Vector2(-1.26759e-05, -5)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_s2y8b")
 
 [node name="Slash2" type="CollisionShape2D" parent="HitboxPivot/Weapon Hitbox"]
+position = Vector2(-1.26759e-05, -5)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_meuc3")
 
