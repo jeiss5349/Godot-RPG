@@ -10,9 +10,10 @@ var player = null
 var health = 100
 var player_inattack_zone = false
 var can_take_damage = true
-var enemy_attack_cooldown = true
-const sweep_speed = 4500
+var attack_in_cooldown = false
+const sweep_speed = 45000
 var attack_ip = false
+var direction = 1
 
 var sweep_Vector = Vector2.ZERO
 
@@ -53,20 +54,18 @@ func try_change_state(new_state):
 func orient():
 	if player != null and state != DEATH:
 		if(player.position.x - position.x) < -5:
-			$HitboxPivot.global_rotation_degrees = 0.0
-			$Sprite2D.flip_h = true
+			direction = -1
 			#scale.x = -scale.x
 
 		elif(player.position.x - position.x) > 5:
-			$HitboxPivot.global_rotation_degrees = 180.0
-			$Sprite2D.flip_h = false
+			direction = 1
 			#scale.x = abs(scale.x)
 
 func run_state():
 	if player != null:
 		orient()
 		position += (player.position - position)/speed
-		animationTree.set("parameters/blend_position", Vector2(1, 0))  # Trigger 'Run'
+		animationTree.set("parameters/Run/blend_position", direction)  # Trigger 'Run'
 		animationState.travel("Run")  # Ensure 'Run' animation plays
 		move_and_collide(Vector2(0, 0)) 
 		if position.distance_to(player.global_position) >= 50:
@@ -79,6 +78,7 @@ func run_state():
 func idle_state():
 	orient()
 	animationState.travel("Idle")
+	animationTree.set("parameters/Idle/blend_position", direction) 
 
 
 func death_state():
@@ -86,17 +86,15 @@ func death_state():
 
 	
 func sweep_state(delta):
-	print("sweeping")
+	print($AnimationTree.get("parameters/sweepFollowThrough/blend_position").get_current_node())
 	if attack_ip:
 		sweep_move(delta)
-		print("sweep move")
-	elif enemy_attack_cooldown:
+	else:
 		sweep_attack()
-		print("sweep attack")
 		
 	
 func slash_state():
-	if player_inattack_zone and enemy_attack_cooldown:
+	if player_inattack_zone:
 			perform_attack_combo()
 
 
@@ -133,55 +131,63 @@ func deal_with_damage(dmgAmount : int):
 				await get_tree().create_timer(1.0).timeout
 				reset_damage_cooldown()
 
-#func take_damage(amount):
-	#health -= amount
-	#print("Enemy health: ", health)
-	#if health <= 0:
-		#play_death_animation()  # Trigger death animation
+func reset_cooldown():
+	attack_in_cooldown = false
 
 func play_death_animation():
+	animationTree.set("parameters/Death/blend_position", direction) 
 	animationState.travel("Death")  # Trigger death animation
 	print("enemy dies")
 	await get_tree().create_timer(5.0).timeout
 	print("enemy deleted")
 	queue_free()
+	
 
 func reset_damage_cooldown():
 	can_take_damage = true
 
 # Handle attack combo (slash1 -> slash2)
 func perform_attack_combo():
+	
 	if player != null: 
 		if player.player_alive and not attack_ip:
 		#attack_ip = true
 		#slash_combo_step = 1e
 			animationState.travel("Slash1")  # Trigger 'Slash1' animation
+			animationTree.set("parameters/Slash1/blend_position", direction) 
 		#print("attack combo started")
+
 func sweep_attack():
+	animationTree.set("parameters/sweepCharge/blend_position", direction)
 	if player.player_alive and not attack_ip:
 		sweep_Vector = (player.position - position).normalized()
 		print(sweep_Vector)
 		animationState.travel("sweepCharge")
-		sweep_IP = true
 		attack_ip = true
 
 
 func sweep_move(delta):
+	animationTree.set("parameters/sweepFollowThrough/blend_position", direction)
 	velocity = sweep_Vector * sweep_speed * delta
+	print("sweep moving", velocity)
 	move_and_slide()
 	
 
 func _on_attack_timer_timeout() -> void:
-	damage_player()
+	if !attack_in_cooldown:  
+		damage_player()
+		attack_in_cooldown = true
+	
+	
+func attack_finished():
 	attack_ip = false
 	try_change_state(RUN)
-
-		#slash_combo_step = 0
-		#attack_ip = false
-	#enemy_attack_cooldown = true
-#
-	#else:
-		#enemy_attack_cooldown = true
+	reset_cooldown()
+	
+func slash_2_direction():
+	animationTree.set("parameters/Slash2/blend_position", direction)
+	
+	
 
 func damage_player() -> void:
 	if player_inattack_zone:
