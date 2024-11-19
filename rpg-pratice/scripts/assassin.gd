@@ -11,7 +11,7 @@ var health = 100
 var player_inattack_zone = false
 var can_take_damage = true
 var attack_in_cooldown = false
-const sweep_speed = 45000
+const sweep_speed = 4500
 var attack_ip = false
 var direction = 1
 
@@ -82,12 +82,12 @@ func idle_state():
 
 
 func death_state():
-	pass
-
-	
+	animationState.travel("Death")
+#print(state_machine.get_current_node())
+#print(state_machine.is_playing())
+	#
 func sweep_state(delta):
-	print($AnimationTree.get("parameters/sweepFollowThrough/blend_position").get_current_node())
-	if attack_ip:
+	if animationState.get_current_node() == "sweepFollowThrough":	
 		sweep_move(delta)
 	else:
 		sweep_attack()
@@ -159,17 +159,18 @@ func perform_attack_combo():
 
 func sweep_attack():
 	animationTree.set("parameters/sweepCharge/blend_position", direction)
-	if player.player_alive and not attack_ip:
-		sweep_Vector = (player.position - position).normalized()
-		print(sweep_Vector)
-		animationState.travel("sweepCharge")
-		attack_ip = true
+	if player != null:
+		if player.player_alive and not attack_ip:
+			sweep_Vector = (player.position - position).normalized()
+			#print(sweep_Vector)
+			animationState.travel("sweepCharge")
+			attack_ip = true
 
 
 func sweep_move(delta):
 	animationTree.set("parameters/sweepFollowThrough/blend_position", direction)
 	velocity = sweep_Vector * sweep_speed * delta
-	print("sweep moving", velocity)
+	#print("sweep moving", velocity)
 	move_and_slide()
 	
 

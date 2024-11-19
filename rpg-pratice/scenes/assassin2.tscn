@@ -1247,14 +1247,13 @@ states/sweepFollowThrough/position = Vector2(768.301, 30.768)
 states/sweepFollowThrough2/node = SubResource("AnimationNodeAnimation_2pxbo")
 states/sweepFollowThrough2/position = Vector2(188.644, -52.2746)
 transitions = ["Idle2", "Run2", SubResource("AnimationNodeStateMachineTransition_bceso"), "Run2", "Idle2", SubResource("AnimationNodeStateMachineTransition_s6rfs"), "Slash12", "Slash22", SubResource("AnimationNodeStateMachineTransition_6q5xq"), "Idle2", "Slash12", SubResource("AnimationNodeStateMachineTransition_ifjxr"), "Slash22", "Idle2", SubResource("AnimationNodeStateMachineTransition_jnr3h"), "Idle2", "Death2", SubResource("AnimationNodeStateMachineTransition_eisid"), "Slash12", "Death2", SubResource("AnimationNodeStateMachineTransition_tnu2h"), "Slash22", "Death2", SubResource("AnimationNodeStateMachineTransition_5otwi"), "Idle2", "sweepCharge2", SubResource("AnimationNodeStateMachineTransition_liq11"), "sweepCharge2", "sweepFollowThrough2", SubResource("AnimationNodeStateMachineTransition_oeh6e"), "sweepFollowThrough2", "Idle2", SubResource("AnimationNodeStateMachineTransition_l8wwu"), "Idle", "Run", SubResource("AnimationNodeStateMachineTransition_aahw2"), "Run", "Idle", SubResource("AnimationNodeStateMachineTransition_3e3nn"), "Idle", "sweepCharge", SubResource("AnimationNodeStateMachineTransition_pfjrv"), "sweepCharge", "sweepFollowThrough", SubResource("AnimationNodeStateMachineTransition_up60b"), "sweepFollowThrough", "Idle", SubResource("AnimationNodeStateMachineTransition_n6j3k"), "Idle", "Death", SubResource("AnimationNodeStateMachineTransition_3atqa"), "Idle", "Slash1", SubResource("AnimationNodeStateMachineTransition_rbw7v"), "Slash1", "Death", SubResource("AnimationNodeStateMachineTransition_qflg6"), "Slash2", "Death", SubResource("AnimationNodeStateMachineTransition_m4ntt"), "Slash2", "Idle", SubResource("AnimationNodeStateMachineTransition_hb7fb"), "Slash1", "Slash2", SubResource("AnimationNodeStateMachineTransition_3s0w5"), "Start", "Idle", SubResource("AnimationNodeStateMachineTransition_sep28")]
-graph_offset = Vector2(-0.699005, -115.232)
+graph_offset = Vector2(202.471, -37.6756)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_djcms"]
 radius = 56.3769
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_s2y8b"]
 radius = 12.0
-height = 30.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_meuc3"]
 radius = 11.0
