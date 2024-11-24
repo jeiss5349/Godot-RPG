@@ -451,6 +451,20 @@ tracks/2/keys = {
 "update": 1,
 "values": [0, 1, 2, 3, 4, 5, 6, 7]
 }
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"teleport"
+}]
+}
 
 [sub_resource type="Animation" id="Animation_867fk"]
 resource_name = "teleportRight"
@@ -490,6 +504,20 @@ tracks/2/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [0, 1, 2, 3, 4, 5, 6, 7]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"teleport"
+}]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_5oiom"]
@@ -590,7 +618,6 @@ switch_mode = 2
 advance_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_pi6da"]
-advance_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_6xonf"]
 switch_mode = 2
@@ -620,9 +647,9 @@ states/heavyAttackReleased/position = Vector2(425, 310)
 states/teleportEnd/node = SubResource("AnimationNodeBlendSpace1D_xl2wv")
 states/teleportEnd/position = Vector2(301, -116)
 states/teleportStart/node = SubResource("AnimationNodeBlendSpace1D_nqq1j")
-states/teleportStart/position = Vector2(611, -116)
+states/teleportStart/position = Vector2(612, -116)
 transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_h2p12"), "Idle", "heavyAttackCharge", SubResource("AnimationNodeStateMachineTransition_73sse"), "heavyAttackCharge", "heavyAttackReleased", SubResource("AnimationNodeStateMachineTransition_innuq"), "heavyAttackReleased", "Idle", SubResource("AnimationNodeStateMachineTransition_qimee"), "Idle", "teleportStart", SubResource("AnimationNodeStateMachineTransition_pi6da"), "teleportStart", "teleportEnd", SubResource("AnimationNodeStateMachineTransition_6xonf"), "teleportEnd", "Idle", SubResource("AnimationNodeStateMachineTransition_mpqho"), "Idle", "Death", SubResource("AnimationNodeStateMachineTransition_v2d1o"), "heavyAttackCharge", "Death", SubResource("AnimationNodeStateMachineTransition_q6gs3"), "heavyAttackReleased", "Death", SubResource("AnimationNodeStateMachineTransition_16i83"), "teleportStart", "Death", SubResource("AnimationNodeStateMachineTransition_k8tnp")]
-graph_offset = Vector2(-259, -219)
+graph_offset = Vector2(-130, -191)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_0ghha"]
 radius = 56.3769
@@ -651,10 +678,9 @@ parameters/Idle/blend_position = 0.0
 parameters/heavyAttackCharge/blend_position = 0
 parameters/heavyAttackReleased/blend_position = 0
 parameters/teleportEnd/blend_position = 0
-parameters/teleportStart/blend_position = 0
+parameters/teleportStart/blend_position = 0.0
 
 [node name="detection_area" type="Area2D" parent="."]
-visible = false
 collision_layer = 2
 collision_mask = 2
 
@@ -677,5 +703,6 @@ shape = SubResource("RectangleShape2D_5bkdl")
 position = Vector2(-0.5, -9.5)
 shape = SubResource("RectangleShape2D_xvwim")
 
+[connection signal="body_entered" from="detection_area" to="." method="_on_detection_area_body_entered"]
 [connection signal="body_entered" from="Enemy Hurtbox" to="." method="_on_enemy_hurtbox_body_entered"]
 [connection signal="body_exited" from="Enemy Hurtbox" to="." method="_on_enemy_hurtbox_body_exited"]
