@@ -102,7 +102,7 @@ tile_map_data = PackedByteArray("AAD8//v/AgAKAAcAAAD///3/AgAKAAcAAAAJAAUAAgAAAAU
 tile_set = SubResource("TileSet_rj4xp")
 
 [node name="player" parent="." instance=ExtResource("4_ocpwf")]
-position = Vector2(42, 98)
+position = Vector2(-398, 298)
 
 [node name="Mage" parent="." instance=ExtResource("5_1wra6")]
-position = Vector2(240, 98)
+position = Vector2(-255, 285)
