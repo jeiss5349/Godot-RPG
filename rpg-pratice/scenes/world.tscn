@@ -118,3 +118,9 @@ offset_left = -244.0
 offset_top = -137.0
 offset_right = 473.0
 offset_bottom = 391.0
+
+[node name="Assassin2" parent="." instance=ExtResource("6_g00sv")]
+position = Vector2(-65, 218)
+
+[node name="Mage2" parent="." instance=ExtResource("5_1wra6")]
+position = Vector2(-97, 43)

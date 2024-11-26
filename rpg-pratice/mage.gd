@@ -6,7 +6,7 @@ var direction = 1
 var teleportDestination = Vector2.ZERO
 var speed = 200
 var teleportRNG = RandomNumberGenerator.new()
-var health = 80
+var health = 120
 
 
 

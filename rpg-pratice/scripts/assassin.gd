@@ -7,7 +7,7 @@ var player_chase = false
 var sweep_IP = false
 var player = null
 
-var health = 100
+var health = 150
 var player_inattack_zone = false
 var can_take_damage = true
 var attack_in_cooldown = false
