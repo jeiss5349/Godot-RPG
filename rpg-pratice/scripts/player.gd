@@ -97,7 +97,9 @@ func player():
 func _on_player_hitbox_body_entered(body: Node2D) -> void:
 
 		if body is assassin2:
-			enemy_reference = body as assassin2
+			enemy_reference = body as assassin2 
+		elif body is mage:
+			enemy_reference = body as mage
 			
 
 
@@ -122,6 +124,7 @@ func attack():
 		attack_ip = true
 		if enemy_reference != null:
 			enemy_reference.deal_with_damage(30) 
+			
 		if dir == "right":
 			$AnimatedSprite2D.flip_h = false
 			$AnimatedSprite2D.play("side_attack")
@@ -146,5 +149,6 @@ func attack():
 func _on_deal_attack_timer_timeout() -> void:
 	$deal_attack_timer.stop()
 	attack_ip = false
+
 	
 	

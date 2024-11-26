@@ -1250,7 +1250,7 @@ transitions = ["Idle2", "Run2", SubResource("AnimationNodeStateMachineTransition
 graph_offset = Vector2(202.471, -37.6756)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_djcms"]
-radius = 56.3769
+radius = 90.4985
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_s2y8b"]
 radius = 12.0
@@ -1294,7 +1294,6 @@ parameters/sweepCharge/blend_position = 0.475
 parameters/sweepFollowThrough/blend_position = -0.00138891
 
 [node name="detection_area" type="Area2D" parent="."]
-visible = false
 collision_layer = 2
 collision_mask = 2
 

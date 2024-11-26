@@ -599,7 +599,8 @@ shape = SubResource("CircleShape2D_nygyt")
 wait_time = 0.6
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(22, 26)
+position = Vector2(1, -8)
+zoom = Vector2(4, 4)
 limit_left = 0
 limit_top = -28
 limit_right = 330

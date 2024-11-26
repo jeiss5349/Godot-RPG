@@ -11,7 +11,7 @@ var health = 100
 var player_inattack_zone = false
 var can_take_damage = true
 var attack_in_cooldown = false
-const sweep_speed = 4500
+const sweep_speed = 6000
 var attack_ip = false
 var direction = 1
 
@@ -138,7 +138,7 @@ func play_death_animation():
 	animationTree.set("parameters/Death/blend_position", direction) 
 	animationState.travel("Death")  # Trigger death animation
 	print("enemy dies")
-	await get_tree().create_timer(5.0).timeout
+	await get_tree().create_timer(1.0).timeout
 	print("enemy deleted")
 	queue_free()
 	

@@ -1,4 +1,4 @@
-[gd_scene load_steps=58 format=3 uid="uid://epfdtrno7nwn"]
+[gd_scene load_steps=67 format=3 uid="uid://epfdtrno7nwn"]
 
 [ext_resource type="Script" path="res://mage.gd" id="1_ty2sj"]
 [ext_resource type="Texture2D" uid="uid://dh0wulidf4472" path="res://art/characters/Orb Mage/idleLEFT.png" id="2_o065g"]
@@ -13,6 +13,8 @@
 [ext_resource type="Texture2D" uid="uid://dxwmfe6fguddb" path="res://art/characters/Orb Mage/TeleportEndRight.png" id="10_os5c8"]
 [ext_resource type="Texture2D" uid="uid://djnbvm8x6gffb" path="res://art/characters/Orb Mage/TeleportEndLeft.png" id="11_4oc8i"]
 [ext_resource type="Texture2D" uid="uid://tme76ff21p3o" path="res://art/characters/Orb Mage/death.png" id="12_xdf4l"]
+[ext_resource type="Texture2D" uid="uid://cx13sdyei6okg" path="res://art/characters/Orb Mage/LightAttackRight.png" id="14_g46oa"]
+[ext_resource type="Texture2D" uid="uid://crp1myxf8h3xk" path="res://art/characters/Orb Mage/LightAttackLeft.png" id="15_knp5t"]
 
 [sub_resource type="Animation" id="Animation_s64o1"]
 resource_name = "Death"
@@ -583,6 +585,120 @@ tracks/3/keys = {
 }]
 }
 
+[sub_resource type="Animation" id="Animation_dt0b1"]
+resource_name = "lightAttackRight"
+step = 0.0769231
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("14_g46oa")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:vframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [13]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.0769231, 0.153846, 0.230769, 0.307692, 0.384615, 0.461538, 0.538462, 0.615385, 0.692308, 0.769231, 0.846154),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.461538, 1),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"spawnOrb"
+}, {
+"args": [0],
+"method": &"try_change_state"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_daahj"]
+resource_name = "lightAttackLeft"
+step = 0.0769231
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("15_knp5t")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:vframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [13]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.0769231, 0.153846, 0.230769, 0.307692, 0.384615, 0.461538, 0.538462, 0.615385, 0.692308, 0.769231, 0.846154, 0.923077),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.461538, 1),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"spawnOrb"
+}, {
+"args": [0],
+"method": &"try_change_state"
+}]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_5oiom"]
 _data = {
 "Death": SubResource("Animation_s64o1"),
@@ -593,6 +709,8 @@ _data = {
 "heavyAttackChargeRight": SubResource("Animation_fymt4"),
 "heavyAttackReleasedLeft": SubResource("Animation_8pvkj"),
 "heavyAttackReleasedRight": SubResource("Animation_6cddq"),
+"lightAttackLeft": SubResource("Animation_daahj"),
+"lightAttackRight": SubResource("Animation_dt0b1"),
 "teleportEndLeft": SubResource("Animation_asnve"),
 "teleportEndRight": SubResource("Animation_04dgk"),
 "teleportStartLeft": SubResource("Animation_njnwf"),
@@ -638,6 +756,19 @@ animation = &"heavyAttackReleasedLeft"
 blend_point_0/node = SubResource("AnimationNodeAnimation_knme4")
 blend_point_0/pos = 1.0
 blend_point_1/node = SubResource("AnimationNodeAnimation_x3orl")
+blend_point_1/pos = -1.0
+blend_mode = 1
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_3cqti"]
+animation = &"lightAttackRight"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_doacm"]
+animation = &"lightAttackLeft"
+
+[sub_resource type="AnimationNodeBlendSpace1D" id="AnimationNodeBlendSpace1D_dnkvt"]
+blend_point_0/node = SubResource("AnimationNodeAnimation_3cqti")
+blend_point_0/pos = 1.0
+blend_point_1/node = SubResource("AnimationNodeAnimation_doacm")
 blend_point_1/pos = -1.0
 blend_mode = 1
 
@@ -696,6 +827,10 @@ switch_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_k8tnp"]
 
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_eibac"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ss8xh"]
+
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_fhchs"]
 states/Death/node = SubResource("AnimationNodeAnimation_py1vp")
 states/Death/position = Vector2(755, 70)
@@ -706,12 +841,14 @@ states/heavyAttackCharge/node = SubResource("AnimationNodeBlendSpace1D_5w1k6")
 states/heavyAttackCharge/position = Vector2(126, 310)
 states/heavyAttackReleased/node = SubResource("AnimationNodeBlendSpace1D_l60tk")
 states/heavyAttackReleased/position = Vector2(425, 310)
+states/lightAttack/node = SubResource("AnimationNodeBlendSpace1D_dnkvt")
+states/lightAttack/position = Vector2(87, -114.443)
 states/teleportEnd/node = SubResource("AnimationNodeBlendSpace1D_xl2wv")
 states/teleportEnd/position = Vector2(301, -116)
 states/teleportStart/node = SubResource("AnimationNodeBlendSpace1D_nqq1j")
 states/teleportStart/position = Vector2(612, -116)
-transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_h2p12"), "Idle", "heavyAttackCharge", SubResource("AnimationNodeStateMachineTransition_73sse"), "heavyAttackCharge", "heavyAttackReleased", SubResource("AnimationNodeStateMachineTransition_innuq"), "heavyAttackReleased", "Idle", SubResource("AnimationNodeStateMachineTransition_qimee"), "Idle", "teleportStart", SubResource("AnimationNodeStateMachineTransition_pi6da"), "teleportStart", "teleportEnd", SubResource("AnimationNodeStateMachineTransition_6xonf"), "teleportEnd", "Idle", SubResource("AnimationNodeStateMachineTransition_mpqho"), "Idle", "Death", SubResource("AnimationNodeStateMachineTransition_v2d1o"), "heavyAttackCharge", "Death", SubResource("AnimationNodeStateMachineTransition_q6gs3"), "heavyAttackReleased", "Death", SubResource("AnimationNodeStateMachineTransition_16i83"), "teleportStart", "Death", SubResource("AnimationNodeStateMachineTransition_k8tnp")]
-graph_offset = Vector2(-3, 54)
+transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_h2p12"), "Idle", "heavyAttackCharge", SubResource("AnimationNodeStateMachineTransition_73sse"), "heavyAttackCharge", "heavyAttackReleased", SubResource("AnimationNodeStateMachineTransition_innuq"), "heavyAttackReleased", "Idle", SubResource("AnimationNodeStateMachineTransition_qimee"), "Idle", "teleportStart", SubResource("AnimationNodeStateMachineTransition_pi6da"), "teleportStart", "teleportEnd", SubResource("AnimationNodeStateMachineTransition_6xonf"), "teleportEnd", "Idle", SubResource("AnimationNodeStateMachineTransition_mpqho"), "Idle", "Death", SubResource("AnimationNodeStateMachineTransition_v2d1o"), "heavyAttackCharge", "Death", SubResource("AnimationNodeStateMachineTransition_q6gs3"), "heavyAttackReleased", "Death", SubResource("AnimationNodeStateMachineTransition_16i83"), "teleportStart", "Death", SubResource("AnimationNodeStateMachineTransition_k8tnp"), "Idle", "lightAttack", SubResource("AnimationNodeStateMachineTransition_eibac"), "lightAttack", "Idle", SubResource("AnimationNodeStateMachineTransition_ss8xh")]
+graph_offset = Vector2(-238, -168.443)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_0ghha"]
 radius = 56.3769
@@ -740,6 +877,7 @@ anim_player = NodePath("../AnimationPlayer")
 parameters/Idle/blend_position = 0.0
 parameters/heavyAttackCharge/blend_position = 0
 parameters/heavyAttackReleased/blend_position = 0
+parameters/lightAttack/blend_position = -0.00138891
 parameters/teleportEnd/blend_position = 0
 parameters/teleportStart/blend_position = 0.0
 

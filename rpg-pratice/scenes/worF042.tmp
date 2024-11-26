@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=4 uid="uid://dyplivytplldi"]
+[gd_scene load_steps=12 format=4 uid="uid://dyplivytplldi"]
 
 [ext_resource type="Texture2D" uid="uid://de1awi7t610sv" path="res://art/tilesets/plains.png" id="1_adffk"]
 [ext_resource type="Texture2D" uid="uid://dkh40nj1cy06d" path="res://art/tilesets/grass.png" id="2_qkc0l"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://0mnpfdxtdf0" path="res://scenes/player.tscn" id="4_ocpwf"]
 [ext_resource type="PackedScene" uid="uid://epfdtrno7nwn" path="res://scenes/mage.tscn" id="5_1wra6"]
 [ext_resource type="PackedScene" uid="uid://b5a627i7fr155" path="res://scenes/assassin2.tscn" id="6_g00sv"]
+[ext_resource type="PackedScene" uid="uid://bmiagcru6nm0q" path="res://scenes/Orb.tscn" id="7_ctu4x"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_gkv0e"]
 texture = ExtResource("1_adffk")
@@ -118,3 +119,6 @@ offset_left = -244.0
 offset_top = -137.0
 offset_right = 473.0
 offset_bottom = 391.0
+
+[node name="Node2D" parent="." instance=ExtResource("7_ctu4x")]
+position = Vector2(38, 122)
