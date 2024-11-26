@@ -41,8 +41,10 @@ func _physics_process(delta):
 			run_state()
 		SLASH:
 			slash_state()
+			print("health of player: ", player.health )
 		SWEEP:
 			sweep_state(delta)
+			print("health of player: ", player.health )
 		DEATH:
 			death_state()
 			

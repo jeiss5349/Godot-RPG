@@ -38,8 +38,10 @@ func _physics_process(delta):
 			start_teleport()
 		ABILITY:
 			ability_state()
+			print("health of player: ", player.health )
 		ATTACK:
 			attack_state()
+			print("health of player: ", player.health )
 		DEATH:
 			death_state()
 		WAIT:

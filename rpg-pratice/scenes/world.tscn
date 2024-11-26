@@ -124,3 +124,6 @@ position = Vector2(-65, 218)
 
 [node name="Mage2" parent="." instance=ExtResource("5_1wra6")]
 position = Vector2(-97, 43)
+
+[node name="Mage3" parent="." instance=ExtResource("5_1wra6")]
+position = Vector2(-9, 38)
