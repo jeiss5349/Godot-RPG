@@ -7,7 +7,7 @@ var player_chase = false
 var sweep_IP = false
 var player = null
 
-var health = 150
+var health = 250
 var player_inattack_zone = false
 var can_take_damage = true
 var attack_in_cooldown = false
@@ -41,10 +41,8 @@ func _physics_process(delta):
 			run_state()
 		SLASH:
 			slash_state()
-			print("health of player: ", player.health )
 		SWEEP:
 			sweep_state(delta)
-			print("health of player: ", player.health )
 		DEATH:
 			death_state()
 			

@@ -4,7 +4,7 @@ var player = null
 var direction = 1
 
 var teleportDestination = Vector2.ZERO
-var speed = 200
+var speed = 100
 var teleportRNG = RandomNumberGenerator.new()
 var health = 120
 
@@ -38,10 +38,8 @@ func _physics_process(delta):
 			start_teleport()
 		ABILITY:
 			ability_state()
-			print("health of player: ", player.health )
 		ATTACK:
 			attack_state()
-			print("health of player: ", player.health )
 		DEATH:
 			death_state()
 		WAIT:
@@ -64,14 +62,14 @@ func death_state():
 
 
 func teleport():
-	var x_offset = teleportRNG.randf_range(-20.0, 20.0)
+	var x_offset = teleportRNG.randf_range(-5.0, 5.0)
 
-	var y_offset = teleportRNG.randf_range(-20.0, 20.0)
+	var y_offset = teleportRNG.randf_range(-5.0, 5.0)
 
 	teleportDestination = (-1*(player.global_position - global_position).normalized()) * speed
 	teleportDestination = teleportDestination + Vector2(x_offset, y_offset)
 	teleportDestination = teleportDestination + global_position
-	global_position = Vector2(clamp(teleportDestination.x, 20.0, 310.0), clamp(teleportDestination.y,-10.0, 214.0))
+	global_position = Vector2(clamp(teleportDestination.x, 430.0, 780.0), clamp(teleportDestination.y, 30.0, 410.0))
 
 	animationState.travel("teleportEnd")
 	animationTree.set("parameters/teleportEnd/blend_position", direction) 

@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://dpccna21g6kr1"]
+
+[ext_resource type="Texture2D" uid="uid://41w3frn2rx5p" path="res://art/Grass.png" id="1_vl8lh"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_68ygu"]
+radius = 6.0
+
+[node name="Grass" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_vl8lh")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+shape = SubResource("CircleShape2D_68ygu")

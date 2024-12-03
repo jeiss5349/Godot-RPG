@@ -830,6 +830,8 @@ switch_mode = 2
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_eibac"]
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ss8xh"]
+switch_mode = 2
+advance_mode = 2
 
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_fhchs"]
 states/Death/node = SubResource("AnimationNodeAnimation_py1vp")
@@ -848,7 +850,7 @@ states/teleportEnd/position = Vector2(301, -116)
 states/teleportStart/node = SubResource("AnimationNodeBlendSpace1D_nqq1j")
 states/teleportStart/position = Vector2(612, -116)
 transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_h2p12"), "Idle", "heavyAttackCharge", SubResource("AnimationNodeStateMachineTransition_73sse"), "heavyAttackCharge", "heavyAttackReleased", SubResource("AnimationNodeStateMachineTransition_innuq"), "heavyAttackReleased", "Idle", SubResource("AnimationNodeStateMachineTransition_qimee"), "Idle", "teleportStart", SubResource("AnimationNodeStateMachineTransition_pi6da"), "teleportStart", "teleportEnd", SubResource("AnimationNodeStateMachineTransition_6xonf"), "teleportEnd", "Idle", SubResource("AnimationNodeStateMachineTransition_mpqho"), "Idle", "Death", SubResource("AnimationNodeStateMachineTransition_v2d1o"), "heavyAttackCharge", "Death", SubResource("AnimationNodeStateMachineTransition_q6gs3"), "heavyAttackReleased", "Death", SubResource("AnimationNodeStateMachineTransition_16i83"), "teleportStart", "Death", SubResource("AnimationNodeStateMachineTransition_k8tnp"), "Idle", "lightAttack", SubResource("AnimationNodeStateMachineTransition_eibac"), "lightAttack", "Idle", SubResource("AnimationNodeStateMachineTransition_ss8xh")]
-graph_offset = Vector2(-238, -168.443)
+graph_offset = Vector2(-15.3747, -89.762)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_0ghha"]
 radius = 56.3769
@@ -874,7 +876,7 @@ libraries = {
 [node name="AnimationTree" type="AnimationTree" parent="."]
 tree_root = SubResource("AnimationNodeStateMachine_fhchs")
 anim_player = NodePath("../AnimationPlayer")
-parameters/Idle/blend_position = 0.0
+parameters/Idle/blend_position = -0.00502515
 parameters/heavyAttackCharge/blend_position = 0
 parameters/heavyAttackReleased/blend_position = 0
 parameters/lightAttack/blend_position = -0.00138891
